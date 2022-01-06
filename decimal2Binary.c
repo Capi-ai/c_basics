@@ -45,43 +45,35 @@ void convert2Decimal( short int dec_num)
     int exp = 0;
     int bin_digit;
     int new_dec_num;
-    // Find the upper limit of the deciaml number
+    // Find the upper limit of the decimal number
     // in terms of exponent of 2
     exp = find_exponent_value(exp, dec_num);
-    printf("Exponent of two : %i. Power of two : %i\n",exp,(int)pow(2,    exp));
+    printf("Value of exponent : %i\n",exp);
+    printf("Binary number : ");
     for (int i = 0; i < exp; i++)
     {
-	printf("Inside loop\n");
-	// Find 1 or 0 accordng to the exponent of 2
-	new_dec_num = dec_num;
-	bin_digit = find_binary_digit(exp, &new_dec_num);
-	printf("Binary digit : %i\n", bin_digit);
-	printf("Decimal number : %i\n", new_dec_num);
+	//printf("Value of exp : %i \n", exp-i);
+	//printf(printf("Power of two for this iteration : %i\n", (int) pow(2,exp-i));
+	if ( ( dec_num - pow(2,exp-i) ) >= 0)
+	{
+	    printf("1");
+	    dec_num = dec_num - pow(2,exp-i);
+	    //printf("The new decimal number is : %i\n",dec_num);
+	}
+	else
+	{
+	    printf("0"); 
+	}
     }
+    printf("\n");
 }
 
 int find_exponent_value( int exponent, short int decimal)
 {
-    while ((int) pow(2,exponent+1) < decimal)
+    while ((int) pow(2,exponent) < decimal)
     {   
         exponent++;
     }
     return exponent;
 }
 
-int find_binary_digit(int exp, int * dec_num)
-{
-    do {
-        *dec_num = *dec_num - (int) pow(2,exp);
-	if (*dec_num < 0)
-	{
-	    return 0;
-	}
-	else if (*dec_num > 0)
-	{
-	    return 1;   
-	}
-	exp--;
-    } while ( exp != 0 );
-    
-}
