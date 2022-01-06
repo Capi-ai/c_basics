@@ -2,7 +2,7 @@
  * BIT MANIPULATION:
  */
  
-/* Convert binary to decimal*/
+/* Convert decimal to binary */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -52,13 +52,10 @@ void convert2Decimal( short int dec_num)
     printf("Binary number : ");
     for (int i = 0; i < exp; i++)
     {
-	//printf("Value of exp : %i \n", exp-i);
-	//printf(printf("Power of two for this iteration : %i\n", (int) pow(2,exp-i));
 	if ( ( dec_num - pow(2,exp-i) ) >= 0)
 	{
 	    printf("1");
 	    dec_num = dec_num - pow(2,exp-i);
-	    //printf("The new decimal number is : %i\n",dec_num);
 	}
 	else
 	{
