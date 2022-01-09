@@ -8,23 +8,26 @@
 #include <stdlib.h>
 #include <math.h>
 
-//
-typedef long long int BIT;
 
 // Function prototypes
 short int getDecimalNum();
-void convert2Decimal( short int dec_num );
-int find_exponent_value( int exponent, short int decimal);
-int find_binary_digit(int exp, int * dec_num);
-
+short int getMaxExp(short int num);
+short int OneOrZero(short int *num, short int *exp);
 
 //
 int main(int argc, char * argv[])
 {
     short int number = getDecimalNum();
-
-    convert2Decimal(number);
-
+    short int exp = getMaxExp(number);
+    short int bin_coeff;
+    while (exp >= 0)
+    {
+        bin_coeff = OneOrZero(&number, &exp);
+        //printf("Decimal after function : %i\n",number);
+        //printf("Exp after function : %i\n",exp);
+	printf("%i",bin_coeff);
+    }
+    printf("\n");
     return 0;
     }
 
@@ -39,38 +42,39 @@ short int getDecimalNum()
     return dec_num;
 }
 
-void convert2Decimal( short int dec_num)
+short int getMaxExp(short int num)
 {
-    printf("Decimal number : %i\n", dec_num);
     int exp = 0;
-    int bin_digit;
-    int new_dec_num;
-    // Find the upper limit of the decimal number
-    // in terms of exponent of 2
-    exp = find_exponent_value(exp, dec_num);
-    printf("Value of exponent : %i\n",exp);
-    printf("Binary number : ");
-    for (int i = 0; i < exp; i++)
+    while ( (int) pow(2,exp) < num )
     {
-	if ( ( dec_num - pow(2,exp-i) ) >= 0)
-	{
-	    printf("1");
-	    dec_num = dec_num - pow(2,exp-i);
-	}
-	else
-	{
-	    printf("0"); 
-	}
+        exp++;	
     }
-    printf("\n");
+    //printf("The exponent is : %i\n",exp);
+    return exp;
 }
 
-int find_exponent_value( int exponent, short int decimal)
+short int OneOrZero(short int *num, short int *exp)
 {
-    while ((int) pow(2,exponent) < decimal)
-    {   
-        exponent++;
+    //printf("Number : %i\n", *num);
+    //printf("Exponent : %i\n", *exp);
+    short int det_bit = *num - pow(2,*exp);
+    short int bit;
+    if ( det_bit > 0)
+    {
+        bit = 1;	
+        *num = det_bit;
     }
-    return exponent;
+    else if ( det_bit < 0)
+    {
+	bit = 0;
+    }
+    else 
+    {
+	bit = 1;
+	*num = -1;
+    }
+    //Update decimal number and exp
+    *exp = *exp - 1;
+    return bit;
+        
 }
-
