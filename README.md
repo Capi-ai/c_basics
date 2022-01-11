@@ -11,3 +11,5 @@ bit2Decimal -> Convert from binary to decimal.
 decimal2Binary -> Convert from decimal to binary.
 
 bit_operators/ -> Bitwise Operators, decimal and binary output
+
+pointers_structures.c -> Print the information on an structure. We use pointers to acces to the info
