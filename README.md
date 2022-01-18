@@ -13,3 +13,6 @@ decimal2Binary -> Convert from decimal to binary.
 bit_operators/ -> Bitwise Operators, decimal and binary output
 
 pointers_structures.c -> Print the information on an structure. We use pointers to acces to the info
+
+print_itself.c -> Program that allows to print the content of itself. 
+
